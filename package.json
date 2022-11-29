@@ -1,0 +1,19 @@
+{
+  "name": "cpsc349-project3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "browser-sync --files './**/*.html'",
+    "tailwind": "npx tailwindcss -i ./src/css/input.css -o ./dist/output.css --watch",
+    "test": "vnu --skip-non-html -Werror && standard",
+    "start": "npm-run-all --parallel dev tailwind"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "tailwindcss": "^3.2.4"
+  }
+}
