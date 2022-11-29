@@ -31,13 +31,13 @@ startGameBtn.addEventListener('click', () => {
     userScoreSpan.textContent = game.userScore
     computerScoreSpan.textContent = game.computerScore
 
-    resultParagraph.textContent = 
+    resultParagraph.textContent =
       `You chose ${userMove}, computer chose ${computerMove}.`
-    
+
     if (tie) {
       resultParagraph.textContent += ' It\'s a tie!'
     } else {
-      resultParagraph.textContent += 
+      resultParagraph.textContent +=
         ` ${winner === 'user' ? 'You win' : 'Computer wins'} this round!`
     }
 
@@ -50,10 +50,10 @@ startGameBtn.addEventListener('click', () => {
       } else {
         gameOverParagraph.textContent += ' Computer won!'
       }
-      gameOverParagraph.textContent += 
+      gameOverParagraph.textContent +=
         ` Game will exit in ${resetSeconds / 1000} seconds.`
 
-      gameButtons.forEach(button => button.disabled = true)
+      gameButtons.forEach(button => { button.disabled = true })
       timeoutId = setTimeout(reset, resetSeconds)
     }
   }
@@ -66,7 +66,7 @@ startGameBtn.addEventListener('click', () => {
     resultParagraph.textContent = ''
     gameOverParagraph.textContent = ''
 
-    gameButtons.forEach(button => button.disabled = false)
+    gameButtons.forEach(button => { button.disabled = false })
 
     rockBtn.removeEventListener('click', handleRockClick)
     paperBtn.removeEventListener('click', handlePaperClick)
@@ -85,7 +85,6 @@ startGameBtn.addEventListener('click', () => {
   paperBtn.addEventListener('click', handlePaperClick)
   scissorsBtn.addEventListener('click', handleScissorsClick)
 })
-
 
 // const start = document.getElementById('start-game')
 // start.onclick = function() {startGame()}

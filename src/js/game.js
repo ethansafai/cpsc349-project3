@@ -13,25 +13,25 @@ class Game {
 
   /**
    * Initialize the Game object with pointsNeeded
-   * 
-   * @param {number} pointsNeeded 
+   *
+   * @param {number} pointsNeeded
    */
-  constructor(pointsNeeded) {
+  constructor (pointsNeeded) {
     this.#pointsNeeded = pointsNeeded
     this.reset()
   }
 
   /**
    * Plays the next turn of the game
-   * 
+   *
    * @param {'rock' | 'paper' | 'scissors'} userMove
    */
-  playNextTurn(userMove) {
+  playNextTurn (userMove) {
     if (this.#done) return
 
     const computerMove = this.#computerMove()
     const winner = this.#winner(userMove, computerMove)
-    let tie = false 
+    let tie = false
 
     if (winner === 'user') {
       this.#userScore++
@@ -41,7 +41,7 @@ class Game {
       tie = true
     }
 
-    if (this.#userScore === this.#pointsNeeded || 
+    if (this.#userScore === this.#pointsNeeded ||
         this.#computerScore === this.#pointsNeeded) {
       this.#done = true
     }
@@ -52,7 +52,7 @@ class Game {
   /**
    * Resets the game's state
    */
-  reset() {
+  reset () {
     this.#userScore = 0
     this.#computerScore = 0
     this.#done = false
@@ -60,10 +60,10 @@ class Game {
 
   /**
    * Returns the computer's random move
-   * 
+   *
    * @returns {'rock' | 'paper' | 'scissors'}
    */
-  #computerMove() {
+  #computerMove () {
     const moves = ['rock', 'paper', 'scissors']
     const choiceIdx = Math.floor(Math.random() * moves.length)
     return moves[choiceIdx]
@@ -71,13 +71,13 @@ class Game {
 
   /**
    * Returns 'user' if the user won, 'tie' if there's a tie, else 'computer'
-   * 
+   *
    * @param {'rock' | 'paper' | 'scissors'} user
    * @param {'rock' | 'paper' | 'scissors'} computer
-   * 
+   *
    * @returns {'user' | 'tie' | 'computer'} winner
    */
-  #winner(user, computer) {
+  #winner (user, computer) {
     if (user === computer) {
       return 'tie'
     }
@@ -100,8 +100,8 @@ class Game {
     return 'computer'
   }
 
-  get userScore() { return this.#userScore }
-  get computerScore() { return this.#computerScore }
+  get userScore () { return this.#userScore }
+  get computerScore () { return this.#computerScore }
 }
 
 export default Game
