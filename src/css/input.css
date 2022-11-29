@@ -14,7 +14,12 @@
     .githubContainer {
         @apply md:flex space-x-6 hover:text-blue-600;
     }
+
     .github {
         @apply text-gray-500  hover:text-blue-900 hidden xl:block;
+    }
+
+    .game-choice {
+        @apply px-2 py-1 font-medium rounded-full w-32 shadow-md hover:-translate-y-1 hover:shadow-none;
     }
 }
