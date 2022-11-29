@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "browser-sync . --files './*.html, ./src/**/*css, ./dist/*.css, ./src/**/*.js'",
+    "dev": "browser-sync . --tunnel --files './*.html, ./src/**/*css, ./dist/*.css, ./src/**/*.js'",
     "tailwind": "npx tailwindcss -i ./src/css/input.css -o ./dist/output.css --watch",
     "test": "concurrently \"vnu --skip-non-html -Werror && standard\" \"npx standard --fix\"",
     "start": "npm-run-all --parallel dev tailwind"

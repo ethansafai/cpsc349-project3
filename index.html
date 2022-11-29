@@ -5,30 +5,57 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="./dist/output.css">
-  <!-- <script type="module" src="src/js/index.js"></script> -->
+  <script type="module" src="./src/js/dom.js"></script>
+  <script type="module" src="./src/js/index.js"></script>
   <title>CPSC 349 | Project 3</title>
 </head>
 <body class="bg-gray-300">
   <header 
-    class="bg-gray-800 p-3 flex justify-around items-center mb-4 shadow-md"
+    class="bg-gray-800 p-3 flex justify-around items-center mb-8 shadow-md"
   >
     <h1 class="text-blue-300 text-3xl font-bold">Rock, Paper, Scissors!</h1>
     <a href="#" class="text-white underline">About Us</a>
   </header>
+
   <main>
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center gap-8 w-full">
       <button 
         id="start-game" 
-        class="bg-white px-3 py-1 rounded-full shadow-md font-medium"
+        class="bg-white px-3 py-1 rounded-full shadow-md font-medium text-lg"
       >
         Start the game
       </button>
+      <div id="game" class="flex flex-col items-center gap-4 hidden w-full">
+        <p class="text-xl font-medium">Make your choice:</p>
+        <div class="flex flex-col gap-4 sm:gap-8 sm:flex-row">
+          <button class="game-choice bg-gray-800 text-white" id="rock">
+            Rock
+          </button>
+          <button class="game-choice bg-gray-100" id="paper">
+            Paper
+          </button>
+          <button class="game-choice bg-blue-100" id="scissors">
+            Scissors
+          </button>
+        </div>
+        <div class="px-8 mt-6 flex flex-col gap-4 font-medium min-w-[300px] max-w-[500px] w-full items-start">
+          <p>Your score: <span id="user-score"></span></p>
+          <p>Computer score: <span id="computer-score"></span></p>
+          <p>Points needed: <span id="points-needed"></span></p>
+          <p id="result"></p>
+          <p id="game-over"></p>
+        </div>
+        <button id="exit" class="game-choice bg-gray-100">Exit</button>
+      </div>
     </div>
   </main>
   
   <footer class="footerContainer">
     <div class="copyRightText">
-      &copy; 2022 <a href="https://themesberg.com" class="hover:underline" target="_blank">Group 12</a>. All rights reserved.
+      &copy; 2022 
+      <a href="https://themesberg.com" class="hover:underline" target="_blank">
+        Group 12
+      </a>. All rights reserved.
     </div>
 
     <div class="githubContainer">
@@ -46,7 +73,5 @@
       </a>
     </div>
   </footer>
-  <script type="module" src="./src/js/index.js"></script>
-  <script type="module" src="./src/js/dom.js"></script>
 </body>
 </html>
