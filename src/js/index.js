@@ -1,0 +1,37 @@
+const start = document.getElementById('start-game')
+start.onclick = function() {startGame()}
+function startGame() {
+    const main = document.getElementsByTagName('main')
+    for (const game of main) {
+        const div = document.createElement("div")
+        const choose = document.createElement("p")
+        choose.innerText = "Make Your Choice:"
+        const rock = document.createElement("button")
+        rock.setAttribute('id', 'rock')
+        const rockImage = document.createElement("img")
+        rockImage.setAttribute("src", "/images/rock.png")
+        rockImage.setAttribute("width", "200")
+        rockImage.setAttribute("height", "200")
+        rock.appendChild(rockImage)
+        const paper = document.createElement("button")
+        paper.setAttribute('id', 'paper')
+        const paperImage = document.createElement("img")
+        paperImage.setAttribute("src", "/images/paper.png")
+        paperImage.setAttribute("width", "200")
+        paperImage.setAttribute("height", "200")
+        paper.appendChild(paperImage)
+        const scissor = document.createElement("button")
+        scissor.setAttribute('id', 'scissor')
+        const scissorImage = document.createElement("img")
+        scissorImage.setAttribute("src", "/images/scissors.png")
+        scissorImage.setAttribute("width", "200")
+        scissorImage.setAttribute("height", "200")
+        scissor.appendChild(scissorImage)
+        div.insertAdjacentElement('beforeend',choose)
+        div.insertAdjacentElement('beforeend', rock)
+        div.insertAdjacentElement('beforeend', paper)
+        div.insertAdjacentElement('beforeend', scissor)
+        game.insertAdjacentElement('beforeend', div)
+    }
+    document.getElementById('start-game').remove()
+}
