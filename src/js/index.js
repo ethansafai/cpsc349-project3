@@ -25,13 +25,12 @@ const exitBtn = document.querySelector('#exit')
 
 const POINTS_NEEDED = 3
 
-function loadGame ({isNewGame}) {
-
+function loadGame ({ isNewGame }) {
   startGameBtn.classList.add('hidden')
   loadGameBtn.classList.add('hidden')
   gameDiv.classList.remove('hidden')
 
-  const game = new Game({isNewGame: isNewGame, pointsNeeded: POINTS_NEEDED})
+  const game = new Game({ isNewGame, pointsNeeded: POINTS_NEEDED })
   const gameButtons = [rockBtn, paperBtn, scissorsBtn]
 
   let timeoutId
@@ -44,10 +43,9 @@ function loadGame ({isNewGame}) {
       resultParagraph.textContent =
       `You chose ${userMove}, computer chose ${computerMove}.`
     }
-    
 
     if (done) {
-      let resetSeconds = 10000
+      const resetSeconds = 10000
 
       gameOverParagraph.textContent = 'Game over!'
       if (game.userScore > game.computerScore) {
@@ -95,11 +93,9 @@ function loadGame ({isNewGame}) {
   const computerRefresh = (computerMove) => {
     if (computerMove === 'rock') {
       computerChoice.src = 'images/rock.png'
-    }
-    else if (computerMove === 'paper') {
+    } else if (computerMove === 'paper') {
       computerChoice.src = 'images/paper.png'
-    }
-    else {
+    } else {
       computerChoice.src = 'images/scissors.png'
     }
   }
@@ -115,11 +111,9 @@ function loadGame ({isNewGame}) {
     pointsNeededSpan.textContent = POINTS_NEEDED
     resultParagraph.textContent = ''
     gameOverParagraph.textContent = ''
-  }
-  else {
+  } else {
     refreshDisplay(game.playNextTurn('rock'))
   }
-
 
   const saveGamePlay = () => game.saveGame()
 
@@ -133,7 +127,6 @@ function loadGame ({isNewGame}) {
     refreshDisplay(move)
     playerChoice.src = 'images/rock.png'
     computerRefresh(move.computerMove)
-    
   }
 
   const handlePaperClick = () => {
@@ -159,9 +152,8 @@ function loadGame ({isNewGame}) {
   scissorsBtn.addEventListener('click', handleScissorsClick)
 }
 
-startGameBtn.addEventListener('click', () => loadGame({isNewGame: true}))
-loadGameBtn.addEventListener('click', () => loadGame({isNewGame: false}))
-
+startGameBtn.addEventListener('click', () => loadGame({ isNewGame: true }))
+loadGameBtn.addEventListener('click', () => loadGame({ isNewGame: false }))
 
 // const start = document.getElementById('start-game')
 // start.onclick = function() {startGame()}

@@ -21,13 +21,12 @@ class Game {
    *
    * @param {number} pointsNeeded
    */
-  constructor ({isNewGame, pointsNeeded}) {
+  constructor ({ isNewGame, pointsNeeded }) {
     this.#isNewGame = isNewGame
     this.#pointsNeeded = pointsNeeded
     if (this.#isNewGame) {
       this.reset()
-    }
-    else {
+    } else {
       this.load()
     }
   }
@@ -39,8 +38,13 @@ class Game {
    */
   playNextTurn (userMove) {
     if (this.#done) {
-      return { undefined, undefined, undefined, undefined, done: this.#done }
-
+      return {
+        userMove: undefined,
+        computerMove: undefined,
+        winner: undefined,
+        tie: undefined,
+        done: this.#done
+      }
     }
 
     const computerMove = this.#computerMove()
@@ -49,10 +53,10 @@ class Game {
 
     if (winner === 'user') {
       this.#userScore++
-      console.log("user score " ,this.#userScore)
+      console.log('user score ', this.#userScore)
     } else if (winner === 'computer') {
       this.#computerScore++
-      console.log("computer score" , this.#computerScore)
+      console.log('computer score', this.#computerScore)
     } else {
       tie = true
     }
@@ -126,10 +130,10 @@ class Game {
   }
 
   /**
-   * Save the point needed to win the game, 
+   * Save the point needed to win the game,
    * current score of the user and computer,
    * and the state of the game (done or not)
-   * 
+   *
    */
   saveGame () {
     localStorage.setItem('userScore', String(this.userScore))
