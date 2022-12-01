@@ -70,6 +70,18 @@ function loadGame ({ isNewGame }) {
     }
   }
 
+  const removeHidden = (element) => {
+    if (element.classList.contains('hidden')) {
+      element.classList.remove('hidden')
+    }
+  }
+
+  const addHidden = (element) => {
+    if (!element.classList.contains('hidden')) {
+      element.classList.add('hidden')
+    }
+  }
+
   const reset = () => {
     clearTimeout(timeoutId)
 
@@ -77,6 +89,8 @@ function loadGame ({ isNewGame }) {
     timerDiv.classList.add('hidden')
     startGameBtn.classList.remove('hidden')
     loadGameBtn.classList.remove('hidden')
+    addHidden(playerChoiceDiv)
+    addHidden(computerChoiceDiv)
 
     resultParagraph.textContent = ''
     gameOverParagraph.textContent = ''
@@ -97,12 +111,6 @@ function loadGame ({ isNewGame }) {
       computerChoice.src = 'images/paper.png'
     } else {
       computerChoice.src = 'images/scissors.png'
-    }
-  }
-
-  const removeHidden = (element) => {
-    if (element.classList.contains('hidden')) {
-      element.classList.remove('hidden')
     }
   }
 
