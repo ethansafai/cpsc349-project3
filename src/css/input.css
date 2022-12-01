@@ -22,4 +22,12 @@
     .game-choice {
         @apply px-2 py-1 font-medium rounded-full w-32 shadow-md hover:-translate-y-1 hover:shadow-none;
     }
+
+    .game-play {
+        @apply bg-white px-3 py-1 rounded-full shadow-md font-medium text-lg hover:bg-blue-100;
+    }
+
+    .timerContainer {
+        @apply bg-blue-100 rounded-full px-2 py-1 shadow-md font-medium text-lg;
+    }
 }

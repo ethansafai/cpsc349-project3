@@ -1,4 +1,9 @@
 class Game {
+  /**
+   * @type {boolean}
+   */
+  #isNewGame
+
   /** @type {number} */
   #pointsNeeded
 
@@ -16,9 +21,15 @@ class Game {
    *
    * @param {number} pointsNeeded
    */
-  constructor (pointsNeeded) {
+  constructor ({isNewGame, pointsNeeded}) {
+    this.#isNewGame = isNewGame
     this.#pointsNeeded = pointsNeeded
-    this.reset()
+    if (this.#isNewGame) {
+      this.reset()
+    }
+    else {
+      this.load()
+    }
   }
 
   /**
@@ -27,7 +38,10 @@ class Game {
    * @param {'rock' | 'paper' | 'scissors'} userMove
    */
   playNextTurn (userMove) {
-    if (this.#done) return
+    if (this.#done) {
+      return { undefined, undefined, undefined, undefined, done: this.#done }
+
+    }
 
     const computerMove = this.#computerMove()
     const winner = this.#winner(userMove, computerMove)
@@ -35,8 +49,10 @@ class Game {
 
     if (winner === 'user') {
       this.#userScore++
+      console.log("user score " ,this.#userScore)
     } else if (winner === 'computer') {
       this.#computerScore++
+      console.log("computer score" , this.#computerScore)
     } else {
       tie = true
     }
@@ -56,6 +72,15 @@ class Game {
     this.#userScore = 0
     this.#computerScore = 0
     this.#done = false
+  }
+
+  /**
+   * Load the saved game state from local storage if not a new game
+   */
+  load () {
+    this.#userScore = Number(localStorage.getItem('userScore'))
+    this.#computerScore = Number(localStorage.getItem('computerScore'))
+    this.#done = localStorage.getItem('done') === 'true'
   }
 
   /**
@@ -100,8 +125,21 @@ class Game {
     return 'computer'
   }
 
+  /**
+   * Save the point needed to win the game, 
+   * current score of the user and computer,
+   * and the state of the game (done or not)
+   * 
+   */
+  saveGame () {
+    localStorage.setItem('userScore', String(this.userScore))
+    localStorage.setItem('computerScore', String(this.computerScore))
+    localStorage.setItem('done', String(this.#done))
+  }
+
   get userScore () { return this.#userScore }
   get computerScore () { return this.#computerScore }
+  get done () { return this.#done }
 }
 
 export default Game

@@ -19,12 +19,9 @@
 
   <main>
     <div class="flex flex-col items-center gap-8 w-full">
-      <button 
-        id="start-game" 
-        class="bg-white px-3 py-1 rounded-full shadow-md font-medium text-lg"
-      >
-        Start the game
-      </button>
+      <button id="start-game" class="game-play">Start the game</button> 
+      <button id="load-game" class="game-play">Load previous game</button>
+
       <div id="game" class="flex flex-col items-center gap-4 hidden w-full">
         <p class="text-xl font-medium">Make your choice:</p>
         <div class="flex flex-col gap-4 sm:gap-8 sm:flex-row">
@@ -38,13 +35,33 @@
             Scissors
           </button>
         </div>
+
+        <div class="flex justify-around">
+          <div id="player-choice" class="space-x-4 hidden">
+            <p>You</p>
+            <img src="images/paper.png" id="playerChoice" alt="player's choice">
+          </div>
+  
+          <div id="computer-choice" class="space-x-4 hidden">
+            <p>Computer</p>
+            <img src="images/paper.png" id="computerChoice" alt="computer's choice">
+            <img>
+          </div>
+        </div>
+        
+
         <div class="px-8 mt-6 flex flex-col gap-4 font-medium min-w-[300px] max-w-[500px] w-full items-start">
           <p>Your score: <span id="user-score"></span></p>
           <p>Computer score: <span id="computer-score"></span></p>
           <p>Points needed: <span id="points-needed"></span></p>
           <p id="result"></p>
           <p id="game-over"></p>
+          <div id="timer" class="timerContainer hidden">
+            <p>Counting down</p>
+            <p id="timerText" class="text-center text-red-600">10</p>
+          </div>
         </div>
+        <button id="save-game" class="game-choice bg-gray-100"> Save Game</button>
         <button id="exit" class="game-choice bg-gray-100">Exit</button>
       </div>
     </div>

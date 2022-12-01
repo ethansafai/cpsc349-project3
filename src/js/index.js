@@ -1,28 +1,37 @@
 import Game from './game.js'
+import decreaseTimer from './timer.js'
 
 const startGameBtn = document.querySelector('#start-game')
+const loadGameBtn = document.querySelector('#load-game')
 const gameDiv = document.querySelector('#game')
+
+const playerChoiceDiv = document.querySelector('#player-choice')
+const computerChoiceDiv = document.querySelector('#computer-choice')
+const playerChoice = document.querySelector('#playerChoice')
+const computerChoice = document.querySelector('#computerChoice')
 
 const userScoreSpan = document.querySelector('#user-score')
 const computerScoreSpan = document.querySelector('#computer-score')
 const pointsNeededSpan = document.querySelector('#points-needed')
 const resultParagraph = document.querySelector('#result')
 const gameOverParagraph = document.querySelector('#game-over')
+const timerDiv = document.querySelector('#timer')
 
 const rockBtn = document.querySelector('#rock')
 const paperBtn = document.querySelector('#paper')
 const scissorsBtn = document.querySelector('#scissors')
+const saveBtn = document.querySelector('#save-game')
 const exitBtn = document.querySelector('#exit')
 
 const POINTS_NEEDED = 3
 
-startGameBtn.addEventListener('click', () => {
-  startGameBtn.classList.add('hidden')
-  gameDiv.classList.remove('hidden')
-  userScoreSpan.textContent = computerScoreSpan.textContent = 0
-  pointsNeededSpan.textContent = POINTS_NEEDED
+function loadGame ({isNewGame}) {
 
-  const game = new Game(POINTS_NEEDED)
+  startGameBtn.classList.add('hidden')
+  loadGameBtn.classList.add('hidden')
+  gameDiv.classList.remove('hidden')
+
+  const game = new Game({isNewGame: isNewGame, pointsNeeded: POINTS_NEEDED})
   const gameButtons = [rockBtn, paperBtn, scissorsBtn]
 
   let timeoutId
@@ -31,18 +40,14 @@ startGameBtn.addEventListener('click', () => {
     userScoreSpan.textContent = game.userScore
     computerScoreSpan.textContent = game.computerScore
 
-    resultParagraph.textContent =
+    if (userMove && computerMove) {
+      resultParagraph.textContent =
       `You chose ${userMove}, computer chose ${computerMove}.`
-
-    if (tie) {
-      resultParagraph.textContent += ' It\'s a tie!'
-    } else {
-      resultParagraph.textContent +=
-        ` ${winner === 'user' ? 'You win' : 'Computer wins'} this round!`
     }
+    
 
     if (done) {
-      const resetSeconds = 10000
+      let resetSeconds = 10000
 
       gameOverParagraph.textContent = 'Game over!'
       if (game.userScore > game.computerScore) {
@@ -54,7 +59,16 @@ startGameBtn.addEventListener('click', () => {
         ` Game will exit in ${resetSeconds / 1000} seconds.`
 
       gameButtons.forEach(button => { button.disabled = true })
+      timerDiv.classList.remove('hidden')
+      decreaseTimer()
       timeoutId = setTimeout(reset, resetSeconds)
+    }
+
+    if (tie) {
+      resultParagraph.textContent += ' It\'s a tie!'
+    } else {
+      resultParagraph.textContent +=
+        ` ${winner === 'user' ? 'You win' : 'Computer wins'} this round!`
     }
   }
 
@@ -62,7 +76,10 @@ startGameBtn.addEventListener('click', () => {
     clearTimeout(timeoutId)
 
     gameDiv.classList.add('hidden')
+    timerDiv.classList.add('hidden')
     startGameBtn.classList.remove('hidden')
+    loadGameBtn.classList.remove('hidden')
+
     resultParagraph.textContent = ''
     gameOverParagraph.textContent = ''
 
@@ -75,16 +92,76 @@ startGameBtn.addEventListener('click', () => {
     exitBtn.removeEventListener('click', reset)
   }
 
+  const computerRefresh = (computerMove) => {
+    if (computerMove === 'rock') {
+      computerChoice.src = 'images/rock.png'
+    }
+    else if (computerMove === 'paper') {
+      computerChoice.src = 'images/paper.png'
+    }
+    else {
+      computerChoice.src = 'images/scissors.png'
+    }
+  }
+
+  const removeHidden = (element) => {
+    if (element.classList.contains('hidden')) {
+      element.classList.remove('hidden')
+    }
+  }
+
+  if (isNewGame) {
+    userScoreSpan.textContent = computerScoreSpan.textContent = 0
+    pointsNeededSpan.textContent = POINTS_NEEDED
+    resultParagraph.textContent = ''
+    gameOverParagraph.textContent = ''
+  }
+  else {
+    refreshDisplay(game.playNextTurn('rock'))
+  }
+
+
+  const saveGamePlay = () => game.saveGame()
+
+  saveBtn.addEventListener('click', saveGamePlay)
   exitBtn.addEventListener('click', reset)
 
-  const handleRockClick = () => refreshDisplay(game.playNextTurn('rock'))
-  const handlePaperClick = () => refreshDisplay(game.playNextTurn('paper'))
-  const handleScissorsClick = () => refreshDisplay(game.playNextTurn('scissors'))
+  const handleRockClick = () => {
+    removeHidden(playerChoiceDiv)
+    removeHidden(computerChoiceDiv)
+    const move = game.playNextTurn('rock')
+    refreshDisplay(move)
+    playerChoice.src = 'images/rock.png'
+    computerRefresh(move.computerMove)
+    
+  }
+
+  const handlePaperClick = () => {
+    removeHidden(playerChoiceDiv)
+    removeHidden(computerChoiceDiv)
+    const move = game.playNextTurn('paper')
+    refreshDisplay(move)
+    playerChoice.src = 'images/paper.png'
+    computerRefresh(move.computerMove)
+  }
+
+  const handleScissorsClick = () => {
+    removeHidden(playerChoiceDiv)
+    removeHidden(computerChoiceDiv)
+    const move = game.playNextTurn('scissors')
+    refreshDisplay(move)
+    playerChoice.src = 'images/scissors.png'
+    computerRefresh(move.computerMove)
+  }
 
   rockBtn.addEventListener('click', handleRockClick)
   paperBtn.addEventListener('click', handlePaperClick)
   scissorsBtn.addEventListener('click', handleScissorsClick)
-})
+}
+
+startGameBtn.addEventListener('click', () => loadGame({isNewGame: true}))
+loadGameBtn.addEventListener('click', () => loadGame({isNewGame: false}))
+
 
 // const start = document.getElementById('start-game')
 // start.onclick = function() {startGame()}
