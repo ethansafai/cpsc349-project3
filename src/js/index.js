@@ -1,6 +1,9 @@
 import Game from './game.js'
 import decreaseTimer from './timer.js'
 
+const mainLink = document.querySelector('#main-link')
+const aboutLink = document.querySelector('#about-link')
+
 const startGameBtn = document.querySelector('#start-game')
 const loadGameBtn = document.querySelector('#load-game')
 const gameDiv = document.querySelector('#game')
@@ -162,6 +165,15 @@ function loadGame ({ isNewGame }) {
 
 startGameBtn.addEventListener('click', () => loadGame({ isNewGame: true }))
 loadGameBtn.addEventListener('click', () => loadGame({ isNewGame: false }))
+
+function show(shown, hidden) {
+  document.getElementById(shown).style.display='block';
+  document.getElementById(hidden).style.display='none';
+  return false;
+}
+
+mainLink.addEventListener('click', () => { show('main', 'AboutUs') })
+aboutLink.addEventListener('click', () => { show('AboutUs', 'main') })
 
 // const start = document.getElementById('start-game')
 // start.onclick = function() {startGame()}
