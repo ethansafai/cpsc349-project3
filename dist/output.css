@@ -942,6 +942,16 @@ video {
   right: 90px;
 }
 
+.descriptonbox{
+  position: absolute;
+  bottom: 800px;
+  left: 1005px;
+  width: 600px;
+  border: 5px solid black;
+  padding: 30px;
+  margin: 20px;
+}
+
 .page {
   width: 100vw;
   height: 100vh;
