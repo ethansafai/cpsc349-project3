@@ -1,136 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="./dist/output.css">
-  <script type="module" src="./src/js/dom.js"></script>
-  <script type="module" src="./src/js/index.js"></script>
-  <title>CPSC 349 | Project 3</title>
-</head>
-<div class="page" id="main">
-  <body class="bg-gray-300" >
-    <header 
-      class="bg-gray-800 p-3 flex justify-around items-center mb-8 shadow-md"
-    >
-      <h1 class="text-blue-300 text-3xl font-bold">Rock, Paper, Scissors!</h1>
-      <a id="about-link" class="text-white underline" href="#AboutUs">About Us</a>
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./dist/output.css" />
+    <script type="module" src="./src/js/dom.js"></script>
+    <script type="module" src="./src/js/index.js"></script>
+    <title>CPSC 349 | Project 3</title>
+  </head>
+  <body class="bg-gray-300">
+    <div class="page-wrapper">
+      <div id="main">
+        <header
+          class="bg-gray-800 p-3 flex justify-around items-center mb-8 shadow-md"
+        >
+          <h1 class="text-blue-300 text-3xl font-bold">
+            Rock, Paper, Scissors!
+          </h1>
+          <a id="about-link" class="text-white underline" href="#AboutUs"
+            >About Us</a
+          >
+        </header>
+        <main>
+          <div class="flex flex-col items-center gap-8 w-full">
+            <button id="start-game" class="game-play">Start the game</button>
+            <button id="load-game" class="game-play">Load previous game</button>
 
-    <main>
-      <div class="flex flex-col items-center gap-8 w-full">
-        <button id="start-game" class="game-play">Start the game</button> 
-        <button id="load-game" class="game-play">Load previous game</button>
+            <div
+              id="game"
+              class="flex flex-col items-center gap-4 hidden w-full"
+            >
+              <p class="text-xl font-medium">Make your choice:</p>
+              <div class="flex flex-col gap-4 sm:gap-8 sm:flex-row">
+                <button class="game-choice bg-gray-800 text-white" id="rock">
+                  Rock
+                </button>
+                <button class="game-choice bg-gray-100" id="paper">
+                  Paper
+                </button>
+                <button class="game-choice bg-blue-100" id="scissors">
+                  Scissors
+                </button>
+              </div>
 
-        <div id="game" class="flex flex-col items-center gap-4 hidden w-full">
-          <p class="text-xl font-medium">Make your choice:</p>
-          <div class="flex flex-col gap-4 sm:gap-8 sm:flex-row">
-            <button class="game-choice bg-gray-800 text-white" id="rock">
-              Rock
-            </button>
-            <button class="game-choice bg-gray-100" id="paper">
-              Paper
-            </button>
-            <button class="game-choice bg-blue-100" id="scissors">
-              Scissors
-            </button>
-          </div>
+              <div class="flex justify-around">
+                <div id="player-choice" class="space-x-4 hidden">
+                  <p>You</p>
+                  <img
+                    src="images/paper.png"
+                    id="playerChoice"
+                    alt="player's choice"
+                  />
+                </div>
 
-          <div class="flex justify-around">
-            <div id="player-choice" class="space-x-4 hidden">
-              <p>You</p>
-              <img src="images/paper.png" id="playerChoice" alt="player's choice">
+                <div id="computer-choice" class="space-x-4 hidden">
+                  <p>Computer</p>
+                  <img
+                    src="images/paper.png"
+                    id="computerChoice"
+                    alt="computer's choice"
+                  />
+                  <img />
+                </div>
+              </div>
+
+              <div
+                class="px-8 mt-6 flex flex-col gap-4 font-medium min-w-[300px] max-w-[500px] w-full items-start"
+              >
+                <p>Your score: <span id="user-score"></span></p>
+                <p>Computer score: <span id="computer-score"></span></p>
+                <p>Points needed: <span id="points-needed"></span></p>
+                <p id="result"></p>
+                <p id="game-over"></p>
+                <div id="timer" class="timerContainer hidden">
+                  <p>Counting down</p>
+                  <p id="timerText" class="text-center text-red-600">10</p>
+                </div>
+              </div>
+              <button id="save-game" class="game-choice bg-gray-100">
+                Save Game
+              </button>
+              <button id="exit" class="game-choice bg-gray-100">Exit</button>
             </div>
-    
-            <div id="computer-choice" class="space-x-4 hidden">
-              <p>Computer</p>
-              <img src="images/paper.png" id="computerChoice" alt="computer's choice">
-              <img>
-            </div>
           </div>
-          
+        </main>
+      </div>
 
-          <div class="px-8 mt-6 flex flex-col gap-4 font-medium min-w-[300px] max-w-[500px] w-full items-start">
-            <p>Your score: <span id="user-score"></span></p>
-            <p>Computer score: <span id="computer-score"></span></p>
-            <p>Points needed: <span id="points-needed"></span></p>
-            <p id="result"></p>
-            <p id="game-over"></p>
-            <div id="timer" class="timerContainer hidden">
-              <p>Counting down</p>
-              <p id="timerText" class="text-center text-red-600">10</p>
+      <div class="hidden" id="AboutUs">
+        <div class="bg-gray-300">
+          <header
+            class="bg-gray-800 p-3 flex justify-around items-center mb-8 shadow-md"
+          >
+            <h1 class="text-blue-300 text-3xl font-bold">About Us!</h1>
+            <a id="main-link" class="text-white underline" href="#main">Main</a>
+          </header>
+          <div>
+            <h3 class="text-2xl font-medium text-center">About our project</h3>
+            <hr class="mb-4" />
+            <div class="w-[60%] mx-auto mb-8">
+              <p>
+                Our project is a rock, paper, scissors game that runs
+                client-side using vanilla JavaScript.
+              </p>
+              <p>
+                The website was styled using Tailwind CSS and game state is
+                saved via the browser's LocalStorage API.
+              </p>
+              <p>Deployment was done using GitHub Pages.</p>
+            </div>
+            <h3 class="text-2xl font-medium text-center">Members</h3>
+            <hr class="mb-4" />
+            <div>
+              <div class="text-center box movetopleft">
+                <p>Leo Arenas</p>
+                <a href="" class="github movegithub"></a>
+              </div>
+              <div class="text-center box movetopcenter">
+                <p>Parsa Bavafa</p>
+                <a
+                  href="https://github.com/Rangerpar/cpsc349-project3"
+                  class="github movegithub resizegithub"
+                ></a>
+              </div>
+              <div class="text-center box movetopright">
+                <p>Nghia Phan</p>
+                <a
+                  href="https://github.com/ptnghia-j/cpsc349-project3"
+                  class="github movegithub resizegithub"
+                >
+                </a>
+              </div>
+              <div class="text-center box movebottomcenter">
+                <p>Ethan Safai</p>
+                <a href="" class="github movegithub resizegithub"></a>
+              </div>
             </div>
           </div>
-          <button id="save-game" class="game-choice bg-gray-100"> Save Game</button>
-          <button id="exit" class="game-choice bg-gray-100">Exit</button>
         </div>
       </div>
-    </main>
+    </div>
 
-    
     <footer class="footerContainer">
       <div class="copyRightText">
-        &copy; 2022 
-        <a href="https://themesberg.com" class="hover:underline" target="_blank">
-          Group 12
-        </a>. All rights reserved.
+        &copy; 2022
+        <a
+          href="https://themesberg.com"
+          class="hover:underline"
+          target="_blank"
+        >
+          Group 12 </a
+        >. All rights reserved.
       </div>
 
       <div class="githubContainer">
         <p>Leo Arenas</p>
-        <a href="" class="github">
-        </a> 
+        <a href="" class="github"> </a>
         <p>Parsa Bavafa</p>
-        <a href="https://github.com/Rangerpar/cpsc349-project3" class="github">
-        </a>
+        <a href="" class="github"> </a>
         <p>Nghia Phan</p>
-        <a href="https://github.com/ptnghia-j/cpsc349-project3" class="github">
-        </a>
+        <a href="" class="github"> </a>
         <p>Ethan Safai</p>
-        <a href="" class="github">
-        </a>
+        <a href="" class="github"> </a>
       </div>
     </footer>
   </body>
-</div>
-
-<div class="page" id="AboutUs">
-  <body class="bg-gray-300" >
-    <header 
-      class="bg-gray-800 p-3 flex justify-around items-center mb-8 shadow-md"
-    >
-      <h1 class="text-blue-300 text-3xl font-bold">About Us!</h1>
-      <a id="main-link" class="text-white underline" href="#main">Main</a>
-    </header>
-    <main>
-      <div>
-        <div class="text-center box movetopleft">
-          <p>Leo Arenas</p>
-          <a href="" class="github movegithub"></a>
-        </div>  
-        <div class="text-center box movetopcenter">
-          <p>Parsa Bavafa</p>
-          <a href="https://github.com/Rangerpar/cpsc349-project3" class="github movegithub resizegithub"></a>
-        </div>
-        <div class="text-center box movetopright">
-          <p>Nghia Phan</p>
-          <a href="https://github.com/ptnghia-j/cpsc349-project3" class="github movegithub resizegithub">
-          </a>
-        </div>
-        <div class="text-center box movebottomcenter">
-          <p>Ethan Safai</p>
-          <a href="" class="github movegithub resizegithub"></a>
-        </div>
-      </div>
-    </main>
-    <footer class="footerContainer">
-      <div class="copyRightText">
-        &copy; 2022 
-        <a href="https://themesberg.com" class="hover:underline" target="_blank">
-          Group 12
-        </a>. All rights reserved.
-      </div>
-  </body>
-</div>
 </html>

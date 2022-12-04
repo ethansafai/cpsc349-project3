@@ -2,9 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    position: relative;
+    min-height: 100vh;
+}
+
 @layer components {
+    .page-wrapper {
+        @apply pb-46;
+    }
+
     .footerContainer {
-        @apply fixed w-full justify-between bottom-10 md:flex rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4;
+        @apply w-full absolute bottom-0 justify-between items-center flex p-4 md:p-6 xl:p-8 bg-gray-800 text-white h-28;
     }
 
     .copyRightText {
