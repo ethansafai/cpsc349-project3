@@ -45,31 +45,31 @@
               </div>
 
               <div class="flex justify-around">
-                <div id="player-choice" class="space-x-4 hidden">
-                  <p>You</p>
+                <div id="player-choice" class="flex justify-around space-x-4 hidden">
+                  <p class=" player-text">Your score: <br> <span class="" id="user-score"></span></p>
                   <img
                     src="images/paper.png"
                     id="playerChoice"
                     alt="player's choice"
                   />
+                  <div class="vs-text"> VS. </div>
                 </div>
 
-                <div id="computer-choice" class="space-x-4 hidden">
-                  <p>Computer</p>
+                <div id="computer-choice" class="flex justify-around space-x-4 hidden">
                   <img
                     src="images/paper.png"
                     id="computerChoice"
                     alt="computer's choice"
                   />
-                  <img />
+                  <p class=" player-text">Computer score: <br> <span class="" id="computer-score"></span></p>
                 </div>
               </div>
 
               <div
                 class="px-8 mt-6 flex flex-col gap-4 font-medium min-w-[300px] max-w-[500px] w-full items-start"
               >
-                <p>Your score: <span id="user-score"></span></p>
-                <p>Computer score: <span id="computer-score"></span></p>
+                
+                
                 <p>Points needed: <span id="points-needed"></span></p>
                 <p id="result"></p>
                 <p id="game-over"></p>
