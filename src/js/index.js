@@ -208,6 +208,9 @@ function loadGame ({ isNewGame }) {
     pointsNeededSpan.textContent = POINTS_NEEDED
     resultParagraph.textContent = ''
     gameOverParagraph.textContent = ''
+    removeHidden(playerChoiceDiv)
+    removeHidden(computerChoiceDiv)
+
   }
 
   const saveGamePlay = () => game.saveGame()
