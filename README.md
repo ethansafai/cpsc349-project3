@@ -7,8 +7,8 @@
 - A new game can start by hitting the `Start the game` button
 - During the game, user can save the game scores to local storage by hitting `Save Game` button. **Note that the game will not be saved if the user does not hit the save button.**
 - A winner of a round is shown by bouncing effect
-- The color of the leadings player is changed to green
-- The color of the losing player is changed to red
+- The color of leading player is changed to green
+- The color of losing player is changed to red
 - The color of tied players is changed to yellow
 
 - The game ends when the user hits the `Exit` button. 
