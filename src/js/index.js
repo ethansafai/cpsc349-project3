@@ -38,6 +38,59 @@ function loadGame ({ isNewGame }) {
 
   let timeoutId
 
+  const updateScoreColor = (winner, loser, isTie) => {
+    console.log(winner.textContent, loser.textContent)
+    if (isTie) {
+      if (winner.classList.contains('leading-text')) {
+        winner.classList.remove('leading-text')
+      }
+
+      if (loser.classList.contains('leading-text')) {
+        loser.classList.remove('leading-text')
+      }
+
+      if (winner.classList.contains('losing-text')) {
+        winner.classList.remove('losing-text')
+      }
+
+      if (loser.classList.contains('losing-text')) {
+        loser.classList.remove('losing-text')
+      }
+
+      if (!winner.classList.contains('tie-text')) {
+        winner.classList.add('tie-text')
+      }
+
+      if (!loser.classList.contains('tie-text')) {
+        loser.classList.add('tie-text')
+      }
+    } else {
+      if (winner.classList.contains('tie-text')) {
+        winner.classList.remove('tie-text')
+      }
+
+      if (loser.classList.contains('tie-text')) {
+        loser.classList.remove('tie-text')
+      }
+
+      if (winner.classList.contains('losing-text')) {
+        winner.classList.remove('losing-text')
+      }
+
+      if (loser.classList.contains('winning-text')) {
+        loser.classList.remove('winning-text')
+      }
+
+      if (!winner.classList.contains('leading-text')) {
+        winner.classList.add('leading-text')
+      }
+
+      if (!loser.classList.contains('losing-text')) {
+        loser.classList.add('losing-text')
+      }
+    }
+  }
+
   const refreshDisplay = ({ userMove, computerMove, winner, tie, done }) => {
     userScoreSpan.textContent = game.userScore
     computerScoreSpan.textContent = game.computerScore
@@ -45,6 +98,33 @@ function loadGame ({ isNewGame }) {
     if (userMove && computerMove) {
       resultParagraph.textContent =
       `You chose ${userMove}, computer chose ${computerMove}.`
+    }
+
+    if (winner === 'user') {
+      playerChoiceDiv.classList.add('animate-bounce')
+      setTimeout(() => {
+        playerChoiceDiv.classList.remove('animate-bounce')
+      }, 2000)
+    } else if (winner === 'computer') {
+      computerChoiceDiv.classList.add('animate-bounce')
+      setTimeout(() => {
+        computerChoiceDiv.classList.remove('animate-bounce')
+      }, 2000)
+    } else {
+      playerChoiceDiv.classList.add('animate-pulse')
+      computerChoiceDiv.classList.add('animate-pulse')
+      setTimeout(() => {
+        playerChoiceDiv.classList.remove('animate-pulse')
+        computerChoiceDiv.classList.remove('animate-pulse')
+      }, 2000)
+    }
+
+    if (game.userScore > game.computerScore) {
+      updateScoreColor(userScoreSpan, computerScoreSpan, false)
+    } else if (game.userScore < game.computerScore) {
+      updateScoreColor(computerScoreSpan, userScoreSpan, false)
+    } else {
+      updateScoreColor(userScoreSpan, computerScoreSpan, true)
     }
 
     if (done) {
@@ -123,7 +203,11 @@ function loadGame ({ isNewGame }) {
     resultParagraph.textContent = ''
     gameOverParagraph.textContent = ''
   } else {
-    refreshDisplay(game.playNextTurn('rock'))
+    userScoreSpan.textContent = game.userScore
+    computerScoreSpan.textContent = game.computerScore
+    pointsNeededSpan.textContent = POINTS_NEEDED
+    resultParagraph.textContent = ''
+    gameOverParagraph.textContent = ''
   }
 
   const saveGamePlay = () => game.saveGame()
@@ -166,10 +250,10 @@ function loadGame ({ isNewGame }) {
 startGameBtn.addEventListener('click', () => loadGame({ isNewGame: true }))
 loadGameBtn.addEventListener('click', () => loadGame({ isNewGame: false }))
 
-function show(shown, hidden) {
-  document.getElementById(shown).style.display='block';
-  document.getElementById(hidden).style.display='none';
-  return false;
+function show (shown, hidden) {
+  document.getElementById(shown).style.display = 'block'
+  document.getElementById(hidden).style.display = 'none'
+  return false
 }
 
 mainLink.addEventListener('click', () => { show('main', 'AboutUs') })

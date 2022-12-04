@@ -9,7 +9,7 @@ body {
 
 @layer components {
     .page-wrapper {
-        @apply pb-46;
+        @apply pb-6;
     }
 
     .footerContainer {
@@ -38,5 +38,25 @@ body {
 
     .timerContainer {
         @apply bg-blue-100 rounded-full px-2 py-1 shadow-md font-medium text-lg;
+    }
+
+    .player-text {
+        @apply text-blue-500 hover:bg-blue-100 text-xl font-bold rounded-full px-2 py-1 relative top-20 h-16;
+    }
+
+    .vs-text {
+        @apply text-blue-500 text-2xl font-bold relative top-20;
+    }
+
+    .leading-text {
+        @apply text-green-500 relative left-10;
+    }
+
+    .losing-text {
+        @apply text-red-500 relative left-10;
+    }
+
+    .tie-text {
+        @apply text-yellow-500 relative left-10;
     }
 }
